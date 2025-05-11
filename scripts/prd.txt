@@ -1,0 +1,151 @@
+PRD: Aivix-Bench
+
+Overview
+
+Aivix-Bench is a voice-driven system for building AI agents and automated workflows, using n8n as the backend constructor. The product's goal is to allow users to assemble workflows using voice commands and a visual interface without the need for programming. This is especially valuable for technical specialists and small teams who need to quickly create and test integration scenarios.
+
+Core Features
+
+Voice Input and Analysis
+
+What it does: Listens to the user and converts speech into a command.
+
+Why it matters: Simplifies UX, allows launching workflow assembly by voice.
+
+How it works: Uses an STT module (Whisper or similar), the command is parsed and analyzed by a backend agent.
+
+n8n Block Catalog
+
+What it does: Shows a list of available nodes.
+
+Why it matters: Allows the user to visually interact with blocks.
+
+How it works: API request is emulated, blocks are loaded on the client, blocks are highlighted if relevant to the current task.
+
+Modal Window with Clarifying Questions
+
+What it does: The system generates a list of questions required to assemble the workflow.
+
+Why it matters: Clarifies missing parameters, reduces errors in automatic generation.
+
+How it works: Questions are generated from the task, the user answers by voice or drops files/data. After validating the answers, the system displays the status of each question.
+
+Visual Process Editor
+
+What it does: Renders a chain of blocks with data.
+
+Why it matters: Allows seeing the process structure and how data flows between nodes.
+
+How it works: Animation of block appearance, passing test data. Node color depends on success (green) or error (red).
+
+Telegram Support
+
+What it does: Adds a Telegram message sending block to the chain.
+
+Why it matters: Expands use cases for real notifications.
+
+How it works: Via the Telegram Message Block in n8n, with chat_id and message parameters.
+
+Technical Architecture
+
+System Components
+
+Frontend: Next.js (app dir), TailwindCSS, shadcn/ui, Web Speech API/Whisper STT, drag&drop interface
+
+Backend: Python/Node.js API, block generation logic, NLP model for processing voice commands
+
+n8n: Executes processes and serves as the chain interpreter
+
+Data models
+
+UserTask: { id, description, required_fields[] }
+
+NodeBlock: { id, name, input_schema, output_schema }
+
+FlowDraft: { id, nodes[], connections[] }
+
+API & Integrations
+
+Whisper API or Web Speech API for STT
+
+n8n API (in the future)
+
+Telegram Bot API for testing sending
+
+Infrastructure
+
+Hosting on Vercel (frontend) + separate backend (FastAPI/Node)
+
+Using websocket or SSE for real-time
+
+Development Roadmap
+
+MVP
+
+Always-on voice input
+
+Visual block list with color coding
+
+Question generation and input modal
+
+Answer validation and chain assembly
+
+Test animation and error marking
+
+Support for basic blocks: Timer, Text, Telegram
+
+Expansion Stages
+
+Saving and exporting agents/chains
+
+Integration with real n8n API
+
+Importing custom blocks
+
+Document and schema recognition
+
+Multilanguage support
+
+Task delegation between agents
+
+Logical Dependency Chain
+
+Voice input and basic interpretation
+
+Block list and visualization
+
+Question generation and filling
+
+Validation and chain assembly
+
+Testing and visual feedback
+
+Telegram integration
+
+Risks and Mitigations
+
+Technical
+
+Natural language processing: start with a limited set of templates
+
+UI complexity: use proven UI frameworks
+
+MVP Focus
+
+Focus on one use case: "Sending notifications"
+
+Support only 3 blocks to simplify assembly logic
+
+Resources
+
+Use open libraries for STT and drag&drop
+
+MVP without a database (everything on the frontend) to test the hypothesis faster
+
+Appendix
+
+n8n blocks: Timer, Text Assignment, Telegram Message
+
+Color coding: Green — valid, Red — error, Blue — selected by the system for assembly
+
+Visual style: minimalism, smooth animations, visual similarity to n8n, but simplified UX
