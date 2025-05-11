@@ -1,5 +1,10 @@
 # Aivix-Bench
 
+## Links
+
+- [Official Documentation](https://docs.aivix.dev/)
+- [Official Website](https://aivix.dev/)
+
 Aivix-Bench is a voice-driven system for building AI agents and automated workflows, using n8n as the backend constructor. Users can assemble workflows using voice commands and a visual interface, without programming.
 
 ## Features
